@@ -1,7 +1,11 @@
 package at.fhtw.alap.location;
 
-import jakarta.persistence.*;
+import at.fhtw.alap.policy.Policy;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -11,18 +15,22 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     private String type;
 
-    @Column(name = "policy_id")
-    private Long policyId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "policy_id", nullable = false)
+    private Policy policy;
 
     @Column(name = "is_active")
     private Boolean isActive;
 
-    public Location() {
-    }
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<LocationH3Cell> h3Cells = new ArrayList<>();
+
+    public Location() {}
 
     public Long getId()  {
         return id;
@@ -45,11 +53,11 @@ public class Location {
         this.type = type;
     }
 
-    public Long getPolicyId() {
-        return policyId;
+    public Policy getPolicyId() {
+        return policy;
     }
-    public void setPolicyId(Long policyId) {
-        this.policyId = policyId;
+    public void setPolicyId(Policy policyId) {
+        this.policy = policyId;
     }
 
     public Boolean getIsActive() {
@@ -57,5 +65,12 @@ public class Location {
     }
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public List<LocationH3Cell> getH3Cells() {
+        return h3Cells;
+    }
+    public void setH3Cells(List<LocationH3Cell> h3Cells) {
+        this.h3Cells = h3Cells;
     }
 }
