@@ -20,7 +20,7 @@ public class Policy {
     private Integer timeBucketMinutes;
 
     @Column(name = "k_treshold", nullable = false)
-    private Integer kTreshold;
+    private Integer kThreshold;
 
     @Column(name = "allow_multi_assignment", nullable = false)
     private Boolean allowMultiAssignment;
@@ -55,11 +55,11 @@ public class Policy {
         this.timeBucketMinutes = timeBucketMinutes;
     }
 
-    public Integer getKTreshold() {
-        return kTreshold;
+    public Integer getKThreshold() {
+        return kThreshold;
     }
-    public void setKTreshold(Integer kTreshold) {
-        this.kTreshold = kTreshold;
+    public void setKThreshold(Integer kThreshold) {
+        this.kThreshold = kThreshold;
     }
 
     public Boolean getAllowMultiAssignment() {

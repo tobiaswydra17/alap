@@ -53,11 +53,11 @@ public class Location {
         this.type = type;
     }
 
-    public Policy getPolicyId() {
+    public Policy getPolicy() {
         return policy;
     }
-    public void setPolicyId(Policy policyId) {
-        this.policy = policyId;
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
     }
 
     public Boolean getIsActive() {
