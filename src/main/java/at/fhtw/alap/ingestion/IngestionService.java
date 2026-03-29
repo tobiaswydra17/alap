@@ -43,6 +43,5 @@ public class IngestionService {
                 defaultPolicy.getTimeBucketMinutes()
         );
 
-        // Später mit Deduplication usw weitermachen
     }
 }

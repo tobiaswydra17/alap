@@ -22,16 +22,10 @@ public class BucketPresence {
     @Column(name = "user_hash", nullable = false, length = 255)
     private String userHash;
 
-    @Column(name = "first_seen_at", nullable = false)
-    private Instant firstSeenAt;
-
     public BucketPresence() {}
 
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Location getLocation() {
@@ -53,12 +47,5 @@ public class BucketPresence {
     }
     public void setUserHash(String userHash) {
         this.userHash = userHash;
-    }
-
-    public Instant getFirstSeenAt() {
-        return firstSeenAt;
-    }
-    public void setFirstSeenAt(Instant firstSeenAt) {
-        this.firstSeenAt = firstSeenAt;
     }
 }
