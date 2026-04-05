@@ -5,6 +5,7 @@ import at.fhtw.alap.aggregation.AggregationCounterRepository;
 import at.fhtw.alap.location.Location;
 import at.fhtw.alap.policy.Policy;
 import at.fhtw.alap.release.dto.ReleaseRunResponse;
+import at.fhtw.alap.release.dto.ReleasedAggregationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -139,20 +140,42 @@ public class ReleaseService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReleasedAggregation> getAllReleased() {
-        return releasedAggregationRepository.findByReleaseStatusOrderByTimeBucketStartDesc(ReleaseStatus.RELEASED);
+    public List<ReleasedAggregationResponse> getAllReleased() {
+        return releasedAggregationRepository
+                .findByReleaseStatusOrderByTimeBucketStartDesc(ReleaseStatus.RELEASED)
+                .stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     @Transactional(readOnly = true)
-    public List<ReleasedAggregation> getReleasedByLocation(Long locationId) {
-        return releasedAggregationRepository.findByLocation_IdAndReleaseStatusOrderByTimeBucketStartAsc(
-                locationId,
-                ReleaseStatus.RELEASED
+    public List<ReleasedAggregationResponse> getReleasedByLocation(Long locationId) {
+        return releasedAggregationRepository
+                .findByLocation_IdAndReleaseStatusOrderByTimeBucketStartAsc(locationId, ReleaseStatus.RELEASED)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReleasedAggregationResponse> getAllSuppressed() {
+        return releasedAggregationRepository
+                .findByReleaseStatusOrderByTimeBucketStartDesc(ReleaseStatus.SUPPRESSED)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    private ReleasedAggregationResponse toResponse(ReleasedAggregation releasedAggregation) {
+        Location location = releasedAggregation.getLocation();
+
+        return new ReleasedAggregationResponse(
+                location.getId(),
+                location.getName(),
+                releasedAggregation.getTimeBucketStart(),
+                releasedAggregation.getTimeBucketEnd(),
+                releasedAggregation.getUniqueUserCount(),
+                releasedAggregation.getReleaseStatus()
         );
-    }
-
-    @Transactional(readOnly = true)
-    public List<ReleasedAggregation> getAllSuppressed() {
-        return releasedAggregationRepository.findByReleaseStatusOrderByTimeBucketStartDesc(ReleaseStatus.SUPPRESSED);
     }
 }

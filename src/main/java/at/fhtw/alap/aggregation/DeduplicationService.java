@@ -18,16 +18,22 @@ public class DeduplicationService {
 
     @Transactional
     public boolean registerIfNotPresent(Location location, Instant bucketStart, String userHash) {
+        boolean alreadyExists = bucketPresenceRepository.existsByLocation_IdAndTimeBucketStartAndUserHash(
+                location.getId(),
+                bucketStart,
+                userHash
+        );
+
+        if (alreadyExists) {
+            return false;
+        }
+
         BucketPresence bucketPresence = new BucketPresence();
         bucketPresence.setLocation(location);
         bucketPresence.setTimeBucketStart(bucketStart);
         bucketPresence.setUserHash(userHash);
 
-        try {
-            bucketPresenceRepository.saveAndFlush(bucketPresence);
-            return true;
-        } catch (DataIntegrityViolationException e) {
-            return false;
-        }
+        bucketPresenceRepository.save(bucketPresence);
+        return true;
     }
 }

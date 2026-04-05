@@ -1,6 +1,7 @@
 package at.fhtw.alap.release;
 
 import at.fhtw.alap.release.dto.ReleaseRunResponse;
+import at.fhtw.alap.release.dto.ReleasedAggregationResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +22,17 @@ public class ReleaseController {
     }
 
     @GetMapping("/released")
-    public List<ReleasedAggregation> getReleasedAggregations() {
+    public List<ReleasedAggregationResponse> getReleasedAggregations() {
         return releaseService.getAllReleased();
     }
 
     @GetMapping("/suppressed")
-    public List<ReleasedAggregation> getSuppressedAggregations() {
+    public List<ReleasedAggregationResponse> getSuppressedAggregations() {
         return releaseService.getAllSuppressed();
     }
 
     @GetMapping("/released/location/{locationId}")
-    public List<ReleasedAggregation> getReleasedAggregationsByLocation(@PathVariable Long locationId) {
+    public List<ReleasedAggregationResponse> getReleasedAggregationsByLocation(@PathVariable Long locationId) {
         return releaseService.getReleasedByLocation(locationId);
     }
 }
