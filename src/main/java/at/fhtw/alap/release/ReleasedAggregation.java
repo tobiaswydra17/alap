@@ -25,7 +25,7 @@ public class ReleasedAggregation {
     private Instant timeBucketEnd;
 
     @Column(name = "unique_user_count", nullable = false)
-    private Integer uniqueUserCount;
+    private Long uniqueUserCount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "release_status", nullable = false, length = 32)
@@ -58,10 +58,10 @@ public class ReleasedAggregation {
         this.timeBucketEnd = timeBucketEnd;
     }
 
-    public Integer getUniqueUserCount() {
+    public Long getUniqueUserCount() {
         return uniqueUserCount;
     }
-    public void setUniqueUserCount(Integer uniqueUserCount) {
+    public void setUniqueUserCount(Long uniqueUserCount) {
         this.uniqueUserCount = uniqueUserCount;
     }
 

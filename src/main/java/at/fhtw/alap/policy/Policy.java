@@ -19,7 +19,7 @@ public class Policy {
     @Column(name = "time_bucket_minutes", nullable = false)
     private Integer timeBucketMinutes;
 
-    @Column(name = "k_treshold", nullable = false)
+    @Column(name = "k_threshold", nullable = false)
     private Integer kThreshold;
 
     @Column(name = "allow_multi_assignment", nullable = false)

@@ -12,4 +12,6 @@ public interface AggregationCounterRepository extends JpaRepository<AggregationC
     Optional<AggregationCounter> findByLocation_IdAndTimeBucketStart(Long locationId, Instant timeBucketStart);
 
     List<AggregationCounter> findByLocation_IdOrderByTimeBucketStartAsc(Long locationId);
+
+    List<AggregationCounter> findAllByOrderByTimeBucketStartAsc();
 }

@@ -6,6 +6,10 @@ import at.fhtw.alap.location.LocationH3CellRepository;
 import at.fhtw.alap.location.LocationRepository;
 import at.fhtw.alap.policy.Policy;
 import at.fhtw.alap.policy.PolicyRepository;
+import at.fhtw.alap.aggregation.AggregationCounter;
+import at.fhtw.alap.aggregation.AggregationCounterRepository;
+import at.fhtw.alap.aggregation.BucketPresence;
+import at.fhtw.alap.aggregation.BucketPresenceRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,22 +21,30 @@ public class DataSeeder implements CommandLineRunner {
     private final PolicyRepository policyRepository;
     private final LocationRepository locationRepository;
     private final LocationH3CellRepository locationH3CellRepository;
+    private final AggregationCounterRepository aggregationCounterRepository;
+    private final BucketPresenceRepository bucketPresenceRepository;
 
     public DataSeeder(
             PolicyRepository policyRepository,
             LocationRepository locationRepository,
-            LocationH3CellRepository locationH3CellRepository
-    ) {
+            LocationH3CellRepository locationH3CellRepository,
+            AggregationCounterRepository aggregationCounterRepository,
+            BucketPresenceRepository bucketPresenceRepository
+            ) {
         this.policyRepository = policyRepository;
         this.locationRepository = locationRepository;
         this.locationH3CellRepository = locationH3CellRepository;
+        this.aggregationCounterRepository = aggregationCounterRepository;
+        this.bucketPresenceRepository = bucketPresenceRepository;
     }
 
     @Override
     public void run(String... args) {
-        if (policyRepository.count() > 0 || locationRepository.count() > 0 || locationH3CellRepository.count() > 0) {
-            return;
-        }
+        aggregationCounterRepository.deleteAll();
+        bucketPresenceRepository.deleteAll();
+        locationH3CellRepository.deleteAll();
+        locationRepository.deleteAll();
+        policyRepository.deleteAll();
 
         Policy defaultPolicy = new Policy();
         defaultPolicy.setName("default_policy");
@@ -68,7 +80,7 @@ public class DataSeeder implements CommandLineRunner {
 
         LocationH3Cell cell3 = new LocationH3Cell();
         cell3.setLocation(stephansplatz);
-        cell3.setH3CellId("891e39d74d3ffff");
+        cell3.setH3CellId("891e15b712bffff");
         locationH3CellRepository.save(cell3);
 
         LocationH3Cell cell4 = new LocationH3Cell();
