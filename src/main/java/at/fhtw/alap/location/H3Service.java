@@ -8,7 +8,7 @@ import java.io.IOException;
 @Service
 public class H3Service {
 
-    private H3Core h3;
+    private final H3Core h3;
 
     public H3Service() {
         try {

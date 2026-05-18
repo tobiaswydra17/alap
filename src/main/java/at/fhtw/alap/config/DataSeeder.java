@@ -56,10 +56,19 @@ public class DataSeeder implements CommandLineRunner {
         defaultPolicy.setName("default_policy");
         defaultPolicy.setH3Resolution(9);
         defaultPolicy.setTimeBucketMinutes(15);
-        defaultPolicy.setKThreshold(3);
+        defaultPolicy.setKThreshold(4);
         defaultPolicy.setAllowMultiAssignment(false);
         defaultPolicy = policyRepository.save(defaultPolicy);
 
+        Policy clubPolicy = new Policy();
+        clubPolicy.setName("club_policy");
+        clubPolicy.setH3Resolution(13);
+        clubPolicy.setTimeBucketMinutes(30);
+        clubPolicy.setKThreshold(3);
+        clubPolicy.setAllowMultiAssignment(false);
+        clubPolicy = policyRepository.save(clubPolicy);
+
+        // Größere Areale
         Location schwedenplatz = new Location();
         schwedenplatz.setName("Schwedenplatz");
         schwedenplatz.setType("POI");
@@ -103,6 +112,66 @@ public class DataSeeder implements CommandLineRunner {
         cell6.setLocation(stephansplatz);
         cell6.setH3CellId("891e39d74dbffff");
         locationH3CellRepository.save(cell6);
+
+        // Bars/Clubs
+        Location popolo = new Location();
+        popolo.setName("Pizzeria Del Popolo");
+        popolo.setType("POI");
+        popolo.setPolicy(clubPolicy);
+        popolo.setIsActive(true);
+        popolo = locationRepository.save(popolo);
+
+        LocationH3Cell popoloCell1 = new LocationH3Cell();
+        popoloCell1.setLocation(popolo);
+        popoloCell1.setH3CellId("8d1e15b713186bf");
+        locationH3CellRepository.save(popoloCell1);
+
+        Location daiquiri = new Location();
+        daiquiri.setName("Daiquiri");
+        daiquiri.setType("POI");
+        daiquiri.setPolicy(clubPolicy);
+        daiquiri.setIsActive(true);
+        daiquiri = locationRepository.save(daiquiri);
+
+        LocationH3Cell daiquiriCell1 = new LocationH3Cell();
+        daiquiriCell1.setLocation(daiquiri);
+        daiquiriCell1.setH3CellId("8d1e15b7131907f");
+        locationH3CellRepository.save(daiquiriCell1);
+
+        LocationH3Cell daiquiriCell2 = new LocationH3Cell();
+        daiquiriCell2.setLocation(daiquiri);
+        daiquiriCell2.setH3CellId("8d1e15b713193bf");
+        locationH3CellRepository.save(daiquiriCell2);
+
+        LocationH3Cell daiquiriCell3 = new LocationH3Cell();
+        daiquiriCell3.setLocation(daiquiri);
+        daiquiriCell3.setH3CellId("8d1e15b7131933f");
+        locationH3CellRepository.save(daiquiriCell3);
+
+        Location kingsbar = new Location();
+        kingsbar.setName("Kingsbar");
+        kingsbar.setType("POI");
+        kingsbar.setPolicy(clubPolicy);
+        kingsbar.setIsActive(true);
+        kingsbar = locationRepository.save(kingsbar);
+
+        LocationH3Cell kingsbarCell1 = new LocationH3Cell();
+        kingsbarCell1.setLocation(kingsbar);
+        kingsbarCell1.setH3CellId("8d1e15b71224abf");
+        locationH3CellRepository.save(kingsbarCell1);
+
+        Location kaktusbar = new Location();
+        kaktusbar.setName("Kaktusbar");
+        kaktusbar.setType("POI");
+        kaktusbar.setPolicy(clubPolicy);
+        kaktusbar.setIsActive(true);
+        kaktusbar = locationRepository.save(kaktusbar);
+
+        LocationH3Cell kaktusbarCell1 = new LocationH3Cell();
+        kaktusbarCell1.setLocation(kaktusbar);
+        kaktusbarCell1.setH3CellId("8d1e15b7122577f");
+        locationH3CellRepository.save(kaktusbarCell1);
+
 
         System.out.println("Seed data created.");
     }

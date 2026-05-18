@@ -26,13 +26,13 @@ public class ReleaseController {
         return releaseService.getAllReleased();
     }
 
-    @GetMapping("/suppressed")
-    public List<ReleasedAggregationResponse> getSuppressedAggregations() {
-        return releaseService.getAllSuppressed();
-    }
-
     @GetMapping("/released/location/{locationId}")
     public List<ReleasedAggregationResponse> getReleasedAggregationsByLocation(@PathVariable Long locationId) {
         return releaseService.getReleasedByLocation(locationId);
+    }
+
+    @GetMapping("/suppressed")
+    public List<ReleasedAggregationResponse> getSuppressedAggregations() {
+        return releaseService.getAllSuppressed();
     }
 }

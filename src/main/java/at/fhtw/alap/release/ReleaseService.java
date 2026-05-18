@@ -2,6 +2,7 @@ package at.fhtw.alap.release;
 
 import at.fhtw.alap.aggregation.AggregationCounter;
 import at.fhtw.alap.aggregation.AggregationCounterRepository;
+import at.fhtw.alap.aggregation.BucketPresenceCleanupService;
 import at.fhtw.alap.location.Location;
 import at.fhtw.alap.policy.Policy;
 import at.fhtw.alap.release.dto.ReleaseRunResponse;
@@ -21,13 +22,16 @@ public class ReleaseService {
 
     private final AggregationCounterRepository aggregationCounterRepository;
     private final ReleasedAggregationRepository releasedAggregationRepository;
+    private final BucketPresenceCleanupService bucketPresenceCleanupService;
 
     public ReleaseService(
             AggregationCounterRepository aggregationCounterRepository,
-            ReleasedAggregationRepository releasedAggregationRepository
+            ReleasedAggregationRepository releasedAggregationRepository,
+            BucketPresenceCleanupService bucketPresenceCleanupService
     ) {
         this.aggregationCounterRepository = aggregationCounterRepository;
         this.releasedAggregationRepository = releasedAggregationRepository;
+        this.bucketPresenceCleanupService = bucketPresenceCleanupService;
     }
 
     @Transactional
@@ -60,13 +64,6 @@ public class ReleaseService {
             Instant bucketStart = counter.getTimeBucketStart();
             Instant bucketEnd = bucketStart.plusSeconds(policy.getTimeBucketMinutes() * 60L);
 
-            log.info("Evaluating bucket -> location: {}, start: {}, end: {}, count: {}",
-                    location.getId(),
-                    bucketStart,
-                    bucketEnd,
-                    counter.getUniqueUserCount()
-            );
-
             if (bucketEnd.isAfter(now)) {
                 log.info("Skipping OPEN bucket -> location: {}, bucketEnd: {}", location.getId(), bucketEnd);
                 skippedOpenBuckets++;
@@ -85,7 +82,6 @@ public class ReleaseService {
             ReleasedAggregation releasedAggregation = releasedAggregationRepository
                     .findByLocation_IdAndTimeBucketStart(location.getId(), bucketStart)
                     .orElseGet(() -> {
-                        log.info("Creating new ReleasedAggregation for location {} and bucket {}", location.getId(), bucketStart);
                         ReleasedAggregation newReleasedAggregation = new ReleasedAggregation();
                         newReleasedAggregation.setLocation(location);
                         newReleasedAggregation.setTimeBucketStart(bucketStart);
@@ -112,6 +108,9 @@ public class ReleaseService {
                 suppressedBuckets++;
             }
         }
+
+        long deletedBucketPresences = bucketPresenceCleanupService.cleanupExpired(Instant.now());
+        log.info("Deleted {} expired bucket presence entries", deletedBucketPresences);
 
         log.info("Release run finished -> processed: {}, released: {}, suppressed: {}, skipped(open): {}",
                 processedBuckets,

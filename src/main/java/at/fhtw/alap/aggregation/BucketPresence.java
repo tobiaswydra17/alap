@@ -1,51 +1,49 @@
 package at.fhtw.alap.aggregation;
 
 import jakarta.persistence.*;
-import at.fhtw.alap.location.Location;
 
 import java.time.Instant;
 
 @Entity
-@Table (name = "bucket_presences", uniqueConstraints = {@UniqueConstraint(columnNames = {"location_id", "time_bucket_start", "user_hash"})})
+@Table(name = "bucket_presences",
+        uniqueConstraints = { @UniqueConstraint(name = "uk_bucket_presence_dedup_key", columnNames = "dedup_key")})
 public class BucketPresence {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "location_id", nullable = false)
-    private Location location;
+    @Column(name = "dedup_key", nullable = false, unique = true, length = 128)
+    private String dedupKey;
 
-    @Column(name = "time_bucket_start", nullable = false)
-    private Instant timeBucketStart;
+    @Column(name = "expires_at", nullable = false)
+    private Instant expiresAt;
 
-    @Column(name = "user_hash", nullable = false, length = 255)
-    private String userHash;
+    public BucketPresence() {
+    }
 
-    public BucketPresence() {}
+    public BucketPresence(String dedupKey, Instant expiresAt) {
+        this.dedupKey = dedupKey;
+        this.expiresAt = expiresAt;
+    }
 
     public Long getId() {
         return id;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-    public void setLocation(Location location) {
-        this.location = location;
+    public String getDedupKey() {
+        return dedupKey;
     }
 
-    public Instant getTimeBucketStart() {
-        return timeBucketStart;
-    }
-    public void setTimeBucketStart(Instant timeBucketStart) {
-        this.timeBucketStart = timeBucketStart;
+    public void setDedupKey(String dedupKey) {
+        this.dedupKey = dedupKey;
     }
 
-    public String getUserHash() {
-        return userHash;
+    public Instant getExpiresAt() {
+        return expiresAt;
     }
-    public void setUserHash(String userHash) {
-        this.userHash = userHash;
+
+    public void setExpiresAt(Instant expiresAt) {
+        this.expiresAt = expiresAt;
     }
 }

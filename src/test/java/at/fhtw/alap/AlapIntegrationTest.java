@@ -33,6 +33,7 @@ class AlapIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

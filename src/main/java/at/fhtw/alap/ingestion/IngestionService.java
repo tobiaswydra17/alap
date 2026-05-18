@@ -48,7 +48,7 @@ public class IngestionService {
 
     @Transactional
     public void ingest(LocationEventRequest request) {
-        Policy defaultPolicy = policyRepository.findByName("default_policy")
+        Policy defaultPolicy = policyRepository.findByName("club_policy")
                 .orElseThrow(() -> new IllegalStateException("Default policy not found"));
 
         String h3CellId = h3Service.latLngToCell(
@@ -91,7 +91,8 @@ public class IngestionService {
             boolean isNewPresence = deduplicationService.registerIfNotPresent(
                     location,
                     bucketStart,
-                    request.getUserHash()
+                    request.getUserHash(),
+                    defaultPolicy
             );
 
             log.info("Presence registration for location {} returned {}", location.getId(), isNewPresence);

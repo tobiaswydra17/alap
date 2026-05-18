@@ -10,6 +10,10 @@ spring:
       ddl-auto: create-drop
     open-in-view: false
 
+alap:
+  dedup:
+    secret: ${ALAP_DEDUP_SECRET:super-secret-dedup-key-change-me}
+
 app:
   seed:
     enabled: false
