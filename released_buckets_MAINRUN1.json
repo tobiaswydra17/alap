@@ -1,0 +1,130 @@
+[
+  {
+    "locationId": 4,
+    "locationName": "Daiquiri",
+    "timeBucketStart": "2026-04-20T21:30:00Z",
+    "timeBucketEnd": "2026-04-20T22:00:00Z",
+    "uniqueUserCount": 11,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 5,
+    "locationName": "Kingsbar",
+    "timeBucketStart": "2026-04-20T21:30:00Z",
+    "timeBucketEnd": "2026-04-20T22:00:00Z",
+    "uniqueUserCount": 9,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 6,
+    "locationName": "Kaktusbar",
+    "timeBucketStart": "2026-04-20T21:30:00Z",
+    "timeBucketEnd": "2026-04-20T22:00:00Z",
+    "uniqueUserCount": 6,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 3,
+    "locationName": "Pizzeria Del Popolo",
+    "timeBucketStart": "2026-04-20T21:30:00Z",
+    "timeBucketEnd": "2026-04-20T22:00:00Z",
+    "uniqueUserCount": 5,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 6,
+    "locationName": "Kaktusbar",
+    "timeBucketStart": "2026-04-20T21:00:00Z",
+    "timeBucketEnd": "2026-04-20T21:30:00Z",
+    "uniqueUserCount": 10,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 5,
+    "locationName": "Kingsbar",
+    "timeBucketStart": "2026-04-20T21:00:00Z",
+    "timeBucketEnd": "2026-04-20T21:30:00Z",
+    "uniqueUserCount": 10,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 3,
+    "locationName": "Pizzeria Del Popolo",
+    "timeBucketStart": "2026-04-20T21:00:00Z",
+    "timeBucketEnd": "2026-04-20T21:30:00Z",
+    "uniqueUserCount": 12,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 4,
+    "locationName": "Daiquiri",
+    "timeBucketStart": "2026-04-20T21:00:00Z",
+    "timeBucketEnd": "2026-04-20T21:30:00Z",
+    "uniqueUserCount": 7,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 5,
+    "locationName": "Kingsbar",
+    "timeBucketStart": "2026-04-20T20:30:00Z",
+    "timeBucketEnd": "2026-04-20T21:00:00Z",
+    "uniqueUserCount": 9,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 3,
+    "locationName": "Pizzeria Del Popolo",
+    "timeBucketStart": "2026-04-20T20:30:00Z",
+    "timeBucketEnd": "2026-04-20T21:00:00Z",
+    "uniqueUserCount": 7,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 4,
+    "locationName": "Daiquiri",
+    "timeBucketStart": "2026-04-20T20:30:00Z",
+    "timeBucketEnd": "2026-04-20T21:00:00Z",
+    "uniqueUserCount": 9,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 6,
+    "locationName": "Kaktusbar",
+    "timeBucketStart": "2026-04-20T20:30:00Z",
+    "timeBucketEnd": "2026-04-20T21:00:00Z",
+    "uniqueUserCount": 7,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 6,
+    "locationName": "Kaktusbar",
+    "timeBucketStart": "2026-04-20T20:00:00Z",
+    "timeBucketEnd": "2026-04-20T20:30:00Z",
+    "uniqueUserCount": 10,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 3,
+    "locationName": "Pizzeria Del Popolo",
+    "timeBucketStart": "2026-04-20T20:00:00Z",
+    "timeBucketEnd": "2026-04-20T20:30:00Z",
+    "uniqueUserCount": 7,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 5,
+    "locationName": "Kingsbar",
+    "timeBucketStart": "2026-04-20T20:00:00Z",
+    "timeBucketEnd": "2026-04-20T20:30:00Z",
+    "uniqueUserCount": 8,
+    "releaseStatus": "RELEASED"
+  },
+  {
+    "locationId": 4,
+    "locationName": "Daiquiri",
+    "timeBucketStart": "2026-04-20T20:00:00Z",
+    "timeBucketEnd": "2026-04-20T20:30:00Z",
+    "uniqueUserCount": 9,
+    "releaseStatus": "RELEASED"
+  }
+]
